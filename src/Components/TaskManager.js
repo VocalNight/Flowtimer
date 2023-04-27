@@ -17,7 +17,7 @@ export default function TaskManager({manageTask, task}) {
                 <button onClick={() => manageTask(name)}>Confirm</button>
             </div>
             <div>
-                <FlowVisualizer/>
+                <FlowVisualizer task={task}/>
             </div>
         </div>
     )
