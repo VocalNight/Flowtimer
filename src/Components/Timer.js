@@ -1,13 +1,22 @@
 import { useState } from "react";
 import { useStopwatch } from "react-timer-hook";
 import ReasonManager from "./ReasonManager";
+import '../style/timerComponent.css'
 
-export default function Timer({ finishCurrentTask, managePausesAndFlow, task, isTimerRunning, manageTimer, isPause, setPause }) {
+export default function Timer({
+  finishCurrentTask,
+  managePausesAndFlow,
+  task,
+  isTimerRunning,
+  manageTimer,
+  isPause,
+  setPause,
+}) {
   const { seconds, minutes, hours, isRunning, start, pause, reset } =
     useStopwatch({ autoStart: false });
 
   const [focusTime, setFocusTime] = useState(false);
-  const [timeTaken, setTimeTaken] = useState({hour: 0, minute: 0, second: 0});
+  const [timeTaken, setTimeTaken] = useState({ hour: 0, minute: 0, second: 0 });
   const message = checkClockMessage();
 
   function checkClockMessage() {
@@ -50,8 +59,11 @@ export default function Timer({ finishCurrentTask, managePausesAndFlow, task, is
     if (focusTime) {
       pause();
 
-      managePausesAndFlow({type: "Flow", reason: '', 
-      duration: {hour: hours, minute: minutes, second: seconds }})
+      managePausesAndFlow({
+        type: "Flow",
+        reason: "",
+        duration: { hour: hours, minute: minutes, second: seconds },
+      });
 
       reset(false, false);
       setFocusTime(false);
@@ -71,13 +83,13 @@ export default function Timer({ finishCurrentTask, managePausesAndFlow, task, is
     finishCurrentTask();
     setFocusTime(false);
     reset(false, false);
-  }
+  };
 
   return (
-    <div>
-      <div>
+    <div id="timerMain">
+      <div id="timerComponent">
         <div>{message}</div>
-        <div>
+        <div id="clock">
           <span>{padTime(hours)}</span> : <span>{padTime(minutes)}</span> :{" "}
           <span>{padTime(seconds)}</span>
         </div>
@@ -90,16 +102,14 @@ export default function Timer({ finishCurrentTask, managePausesAndFlow, task, is
           <button onClick={() => finishTask()}>Finish Task</button>
         </div>
       </div>
-      <div>
-        <ReasonManager
-          time={{hours, minutes, seconds}}
-          pauseAdded={pauseAdded}
-          managePauses={managePausesAndFlow}
-          task={task}
-          isTimerRunning={isTimerRunning}
-          isPause={isPause}
-        />
-      </div>
+      <ReasonManager
+        time={{ hours, minutes, seconds }}
+        pauseAdded={pauseAdded}
+        managePauses={managePausesAndFlow}
+        task={task}
+        isTimerRunning={isTimerRunning}
+        isPause={isPause}
+      />
     </div>
   );
 }

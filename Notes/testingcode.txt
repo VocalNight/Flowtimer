@@ -1,0 +1,8 @@
+      {task?.name}
+      <p>{task?.id} </p>
+
+      <p>{isTimerRunning ? "yes" : "no"}</p>
+      <p>
+        hours: {taskDuration.hours} - Minutes: {taskDuration.minutes} - Seconds:{" "}
+        {taskDuration.seconds}
+      </p>

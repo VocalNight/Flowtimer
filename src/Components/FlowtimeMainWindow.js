@@ -2,12 +2,21 @@ import { useState } from "react";
 import TaskManager from "./TaskManager";
 import Timer from "./Timer";
 import { nanoid } from "nanoid";
+import "../style/mainWindow.css";
 
 export default function FlowTimeMainWindow() {
-  const [task, setTask] = useState({ id: nanoid(), name: "", pausesAndFlow: [] });
+  const [task, setTask] = useState({
+    id: nanoid(),
+    name: "",
+    pausesAndFlow: [],
+  });
   const [isPause, setIsPause] = useState(false);
   const [isTimerRunning, setIsTimmerRunning] = useState(false);
-  const [taskDuration, setTaskDuration] = useState({hours: 0, minutes: 0, seconds: 0});
+  const [taskDuration, setTaskDuration] = useState({
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   function manageTask(taskName) {
     if (task) {
@@ -16,9 +25,9 @@ export default function FlowTimeMainWindow() {
   }
 
   function finishCurrentTask() {
-    console.log('hi');
-    setTaskDuration({hours: 0, minutes: 0, seconds: 0})
-    setTask({id: nanoid(), name: "", pausesAndFlow: [] });
+    console.log("hi");
+    setTaskDuration({ hours: 0, minutes: 0, seconds: 0 });
+    setTask({ id: nanoid(), name: "", pausesAndFlow: [] });
   }
 
   function managePausesAndFlow(pause) {
@@ -30,10 +39,8 @@ export default function FlowTimeMainWindow() {
   }
 
   function manageTaskDuration(time) {
-
     console.log(calculateTime(time));
     setTaskDuration(calculateTime(time));
-
   }
 
   function calculateTime(time) {
@@ -49,7 +56,7 @@ export default function FlowTimeMainWindow() {
       hours += 1;
     }
 
-    return {hours, minutes, seconds}
+    return { hours, minutes, seconds };
   }
 
   function setPauseOrTask() {
@@ -61,29 +68,19 @@ export default function FlowTimeMainWindow() {
   }
 
   return (
-    <div>
-      <div>
-        <div>
-          <Timer
-          manageTaskDuration={manageTaskDuration}
-            finishCurrentTask={finishCurrentTask}
-            managePausesAndFlow={managePausesAndFlow}
-            task={task}
-            isTimerRunning={isTimerRunning}
-            manageTimer={manageTimer}
-            isPause={isPause}
-            setPause={setPauseOrTask}
-          />
-        </div>
-      </div>
-      <div>
-        <TaskManager manageTask={manageTask} task={task} />
-      </div>
-      {task?.name}
-      <p>{task?.id} </p>
+    <div id="mainWindow">
+      <Timer
+        manageTaskDuration={manageTaskDuration}
+        finishCurrentTask={finishCurrentTask}
+        managePausesAndFlow={managePausesAndFlow}
+        task={task}
+        isTimerRunning={isTimerRunning}
+        manageTimer={manageTimer}
+        isPause={isPause}
+        setPause={setPauseOrTask}
+      />
 
-      <p>{isTimerRunning ? "yes" : "no"}</p>
-      <p>hours: {taskDuration.hours} - Minutes: {taskDuration.minutes} - Seconds: {taskDuration.seconds}</p>
+      <TaskManager manageTask={manageTask} task={task} />
     </div>
   );
 }

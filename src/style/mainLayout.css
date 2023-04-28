@@ -1,0 +1,20 @@
+#mainView {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 95vh;
+    width: auto;
+}
+
+body, html {
+    margin: 0px;
+}
+
+div {
+    border: 1px blue solid;
+}
+
+hr {
+    width: 100px;
+}

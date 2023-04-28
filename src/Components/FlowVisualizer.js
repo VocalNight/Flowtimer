@@ -1,7 +1,30 @@
 export default function FlowVisualizer({ task }) {
+
+  const padTime = (time) => {
+    return String(time).length === 1 ? `0${time}` : `${time}`;
+  };
+
+
   return (
     <div>
       <div>
+        <table>
+          <tr>
+            <th>Type</th>
+            <th>Reason</th>
+            <th>Duration</th>
+          </tr>
+          {task.pausesAndFlow.map((pause) => (
+            <tr>
+              <td>{pause.type}</td>
+              <td>{pause.reason}</td>
+              <td>{padTime(pause.duration.hour)} : {padTime(pause.duration.minute)} : {padTime(pause.duration.second)}</td>
+            </tr>
+          ))}
+        </table>
+
+
+
         <ul>
           {task.pausesAndFlow.map((pause) => (
             <li key={pause.reason}>

@@ -1,13 +1,13 @@
 import FlowTimeMainWindow from "./Components/FlowtimeMainWindow";
+import Header from "./Components/Header";
+import './style/mainLayout.css'
 
 function App() {
   return (
-    <div>
-      <div>
-      </div>
-      <div>
+    <div id="mainView">
+        <Header />
+        <hr/>
         <FlowTimeMainWindow />
-      </div>
     </div>
   );
 }
